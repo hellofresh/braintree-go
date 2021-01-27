@@ -13,6 +13,7 @@ type PayPalAccount struct {
 	ImageURL      string                `xml:"image-url,omitempty"`
 	CreatedAt     *time.Time            `xml:"created-at,omitempty"`
 	UpdatedAt     *time.Time            `xml:"updated-at,omitempty"`
+	RevokedAt     *time.Time            `xml:"revoked-at,omitempty"`
 	Subscriptions *Subscriptions        `xml:"subscriptions,omitempty"`
 	Default       bool                  `xml:"default,omitempty"`
 	Options       *PayPalAccountOptions `xml:"options,omitempty"`
@@ -51,6 +52,11 @@ func (paypalAccount *PayPalAccount) IsDefault() bool {
 
 func (paypalAccount *PayPalAccount) GetImageURL() string {
 	return paypalAccount.ImageURL
+}
+
+// GetRevokedAt returns the revoked at time
+func (paypalAccount *PayPalAccount) GetRevokedAt() *time.Time {
+	return paypalAccount.RevokedAt
 }
 
 // AllSubscriptions returns all subscriptions for this paypal account, or nil if none present.
