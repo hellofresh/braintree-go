@@ -223,10 +223,16 @@ func TestDecimal_Subtract(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Add decimals of same scales",
+			name: "Subtract decimals of same scales",
 			d1:   NewDecimal(6594, 2),
 			d2:   NewDecimal(999, 2),
 			want: NewDecimal(5595, 2),
+		},
+		{
+			name: "Subtract a bigger decimal from a smaller decimal",
+			d1:   NewDecimal(999, 2),
+			d2:   NewDecimal(6594, 2),
+			want: NewDecimal(-5595, 2),
 		},
 	}
 	for _, tt := range tests {
