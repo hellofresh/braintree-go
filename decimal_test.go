@@ -160,6 +160,12 @@ func TestNewDecimalByCurrency(t *testing.T) {
 			amount:   150.020,
 			expected: NewDecimal(150, 0),
 		},
+		{
+			name:     "Test EUR currency with 2 decimal adjustment points is rounded",
+			currency: "EUR",
+			amount:   16.989999999999997,
+			expected: NewDecimal(1699, 2),
+		},
 	}
 
 	for _, tt := range tests {

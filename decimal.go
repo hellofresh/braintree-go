@@ -34,7 +34,7 @@ func NewDecimalByCurrency(currency string, amount float64) *Decimal {
 
 	coef := math.Pow(10, float64(decimals))
 
-	return NewDecimal(int64(amount*coef), int(decimals))
+	return NewDecimal(int64(math.Round(amount*coef)), int(decimals))
 }
 
 // MarshalText outputs a decimal representation of the scaled number
