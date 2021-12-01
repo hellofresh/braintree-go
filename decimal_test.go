@@ -172,3 +172,73 @@ func TestNewDecimalByCurrency(t *testing.T) {
 		})
 	}
 }
+
+func TestDecimal_Add(t *testing.T) {
+	tests := []struct {
+		name    string
+		d1      *Decimal
+		d2      *Decimal
+		want    *Decimal
+		wantErr bool
+	}{
+		{
+			name:    "Add decimals of different scales",
+			d1:      NewDecimal(1, 1),
+			d2:      NewDecimal(1, 0),
+			wantErr: true,
+		},
+		{
+			name: "Add decimals of same scales",
+			d1:   NewDecimal(6594, 2),
+			d2:   NewDecimal(999, 2),
+			want: NewDecimal(7593, 2),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := tt.d1.Add(tt.d2)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Add() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Add() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDecimal_Subtract(t *testing.T) {
+	tests := []struct {
+		name    string
+		d1      *Decimal
+		d2      *Decimal
+		want    *Decimal
+		wantErr bool
+	}{
+		{
+			name:    "Subtract decimals of different scales",
+			d1:      NewDecimal(1, 1),
+			d2:      NewDecimal(1, 0),
+			wantErr: true,
+		},
+		{
+			name: "Add decimals of same scales",
+			d1:   NewDecimal(6594, 2),
+			d2:   NewDecimal(999, 2),
+			want: NewDecimal(5595, 2),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := tt.d1.Subtract(tt.d2)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Subtract() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Subtract() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

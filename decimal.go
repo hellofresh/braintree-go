@@ -3,6 +3,7 @@ package braintree
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -122,4 +123,22 @@ func (d *Decimal) String() string {
 	}
 
 	return string(b)
+}
+
+// Add returns string representation of Decimal
+func (d *Decimal) Add(d2 *Decimal) (*Decimal, error) {
+	if d.Scale != d2.Scale {
+		return nil, fmt.Errorf("cannot add decimals with different scales, %d != %d", d.Scale, d2.Scale)
+	}
+
+	return NewDecimal(d.Unscaled+d2.Unscaled, d.Scale), nil
+}
+
+// Subtract returns string representation of Decimal
+func (d *Decimal) Subtract(d2 *Decimal) (*Decimal, error) {
+	if d.Scale != d2.Scale {
+		return nil, fmt.Errorf("cannot sutract decimals with different scales, %d != %d", d.Scale, d2.Scale)
+	}
+
+	return NewDecimal(d.Unscaled-d2.Unscaled, d.Scale), nil
 }
