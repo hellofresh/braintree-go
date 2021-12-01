@@ -25,16 +25,11 @@ func NewDecimal(unscaled int64, scale int) *Decimal {
 
 // NewDecimalByCurrency - creates a new Decimal by using the decimal scales of the provided currency.
 func NewDecimalByCurrency(currency string, amount float64) *Decimal {
-	currency = strings.ToUpper(currency)
+	scale := CurrencyScale(currency)
 
-	decimals, ok := CurrencyScales[currency]
-	if !ok {
-		decimals = DefaultCurrencyScales
-	}
+	coef := math.Pow(10, float64(scale))
 
-	coef := math.Pow(10, float64(decimals))
-
-	return NewDecimal(int64(math.Round(amount*coef)), int(decimals))
+	return NewDecimal(int64(math.Round(amount*coef)), int(scale))
 }
 
 // MarshalText outputs a decimal representation of the scaled number
