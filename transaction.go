@@ -206,6 +206,7 @@ type TransactionOptions struct {
 	StoreShippingAddressInVault      bool                                   `xml:"store-shipping-address-in-vault,omitempty"`
 	HoldInEscrow                     bool                                   `xml:"hold-in-escrow,omitempty"`
 	TransactionOptionsPaypalRequest  *TransactionOptionsPaypalRequest       `xml:"paypal,omitempty"`
+	TransactionOptionsVenmoRequest   *TransactionOptionsVenmoRequest        `xml:"venmo,omitempty"`
 	SkipAdvancedFraudChecking        bool                                   `xml:"skip_advanced_fraud_checking,omitempty"`
 	ThreeDSecure                     *TransactionOptionsThreeDSecureRequest `xml:"three-d-secure,omitempty"`
 }
@@ -215,6 +216,10 @@ type TransactionOptionsPaypalRequest struct {
 	PayeeEmail        string
 	Description       string
 	SupplementaryData map[string]string
+}
+
+type TransactionOptionsVenmoRequest struct {
+	ProfileId string
 }
 
 func (r TransactionOptionsPaypalRequest) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
