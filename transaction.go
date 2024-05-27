@@ -219,7 +219,7 @@ type TransactionOptionsPaypalRequest struct {
 }
 
 type TransactionOptionsVenmoRequest struct {
-	ProfileId string
+	ProfileId string `xml:"profile-id"`
 }
 
 func (r TransactionOptionsPaypalRequest) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
