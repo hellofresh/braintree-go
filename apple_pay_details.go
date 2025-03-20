@@ -3,6 +3,7 @@ package braintree
 type ApplePayDetails struct {
 	Token                 string `xml:"token"`
 	CardType              string `xml:"card-type"`
+	Prepaid               string `xml:"prepaid"`
 	PaymentInstrumentName string `xml:"payment-instrument-name"`
 	SourceDescription     string `xml:"source-description"`
 	CardholderName        string `xml:"cardholder-name"`
