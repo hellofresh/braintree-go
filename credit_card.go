@@ -41,6 +41,7 @@ type CreditCard struct {
 	Subscriptions             *Subscriptions     `xml:"subscriptions,omitempty"`
 	Verifications             *Verifications     `xml:"verifications,omitempty"`
 	ProductID                 string             `xml:"product-id,omitempty"`
+	IsNetworkTokenized        bool               `xml:"is-network-tokenized,omitempty"`
 }
 
 type CreditCards struct {
